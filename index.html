@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>我们呼吸的风</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500&family=Noto+Sans+SC:wght@300;400;500&family=Noto+Serif+SC:wght@400;600;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body class="at-home">
+<canvas id="gl" aria-hidden="true"></canvas>
+<div class="shade" id="shade"></div>
+<div class="grain"></div>
+
+<div class="hud">
+  <i class="corner c1"></i><i class="corner c2"></i><i class="corner c3"></i><i class="corner c4"></i>
+  <div class="topbar">
+    <div class="brand">我们呼吸的风<small>THE WIND WE BREATHE</small></div>
+    <button class="hbtn jonly" id="homeBtn">← 旅程 / JOURNEYS</button>
+    <button class="hbtn" id="soundBtn" aria-pressed="false">声音 · 关</button>
+    <button class="hbtn hide-sm" id="aboutBtn">关于本作</button>
+    <div class="spacer"></div>
+    <div class="prog jonly"><span id="hJourney">旅程</span><b id="hProg">000%</b></div>
+  </div>
+  <div class="gauge jonly" id="gauge"><i class="rail"></i><i class="mark" id="gMark"></i></div>
+  <div class="readouts jonly">
+    <div><span>地点 / LOCATION</span><b id="rPlace">—</b></div>
+    <div><span>年代 / YEAR</span><b id="rYear">—</b></div>
+    <div><span>关键数据 / DATA</span><b id="rData">—</b></div>
+    <div><span>风沙强度（画面）</span><div class="bar"><i id="rWind"></i></div></div>
+  </div>
+  <div class="scrollhint jonly" id="scrollHint"><i></i>滚动探索 · 点击 ◎ 深入</div>
+</div>
+
+<!-- 首页 -->
+<div id="home">
+  <div class="home-title">
+    <div class="kicker">中国式现代化的理论与实践 · 人与自然和谐共生</div>
+    <h1>我们呼吸的风</h1>
+    <p>四十年前，毛乌素的风里全是沙。今天，同一阵风吹过樟子松林、草方格和光伏板。选择一段旅程，跟着风去看。</p>
+  </div>
+  <div class="journeys">
+    <button class="jcard hp" data-j="muus"><img src="img/muus_aerial_2026.jpg" alt="2026年航拍的毛乌素沙地，沙丘上成行的人工林"><div><span class="no">JOURNEY 01 · 毛乌素</span><h3>一个人</h3><p>殷玉珍与“赛考斯”：五千美元，五万棵树，二十六年后的重逢。</p><span class="go">内蒙古 · 乌审旗 · 进入 →</span></div></button>
+    <button class="jcard hp" data-j="shapotou"><img src="img/straw_grid.jpg" alt="沙漠中半埋的麦草方格沙障"><div><span class="no">JOURNEY 02 · 沙坡头</span><h3>一方格</h3><p>一米见方的“中国魔方”，锁住流沙，护住铁路，让腾格里西退。</p><span class="go">宁夏 · 中卫 · 进入 →</span></div></button>
+    <button class="jcard hp" data-j="kubuqi"><img src="img/kubuqi_2024.jpg" alt="卫星影像中库布其沙漠里成片的光伏电站"><div><span class="no">JOURNEY 03 · 库布其</span><h3>一个国家</h3><p>光伏长城、“三北”工程，从“沙进人退”到“绿进沙退”。</p><span class="go">鄂尔多斯 · 三北 · 进入 →</span></div></button>
+  </div>
+</div>
+
+<div id="beats"></div>
+<div id="hotspots"></div>
+<div id="scroller"></div>
+
+<aside id="drawer" aria-label="热点详情">
+  <button class="hbtn x" id="drawerX">关闭 ✕</button>
+  <div id="drawerBody"></div>
+</aside>
+
+<div id="about" role="dialog" aria-label="关于本作">
+  <div class="about-in">
+    <div class="k">ABOUT · 作品介绍</div>
+    <h2>我们呼吸的风</h2>
+    <p>《我们呼吸的风》是一件以“人与自然和谐共生”为主题的沉浸式互动网页。观众先用手拂开封门的黄沙，回到1985年的毛乌素，再从三段旅程中任选其一：在“一个人”里跟随殷玉珍与美国友人“赛考斯”把五千美元种成五万棵树；在“一方格”里亲手铺下草方格，拖动十年时间轴看沙地复苏；在“一个国家”里穿行光伏长城，俯瞰“三北”绿色长城。三维沙海随滚动由黄转绿，真实影像与卫星对比穿插其间，呈现中国式现代化“绿水青山就是金山银山”的实践图景。</p>
+    <div class="meta">
+      <div><b>主题</b><span>人与自然和谐共生；兼及共同富裕（光伏治沙、林下经济）与和平发展（治沙经验走向世界）</span></div>
+      <div><b>交互</b><span>拂沙开场、三段可选旅程、滚动驱动的实时 3D、可点击热点、卫星前后对比、时间轴、绿色约定</span></div>
+      <div><b>影像</b><span>三维场景为浏览器实时渲染；照片与卫星图采用开放授权或公有领域素材，作者与授权见各图注</span></div>
+    </div>
+    <p style="margin-top:26px"><button class="act ghost" id="aboutX">返回</button></p>
+  </div>
+</div>
+
+<div id="intro">
+  <canvas id="sandCv"></canvas>
+  <div class="intro-text">
+    <div>
+      <div class="k">1985 · 内蒙古乌审旗 · 毛乌素沙地</div>
+      <h2>一夜风沙，黄沙封门</h2>
+      <p>那一年，殷玉珍每天清晨要先把门口的沙扫开。<br>按住并拖动，拂开这层沙。</p>
+    </div>
+  </div>
+  <div class="intro-meter"><div class="bar"><i id="introBar"></i></div><span id="introMsg">已拂开 0%</span></div>
+  <button class="skip" id="skipBtn">跳过</button>
+</div>
+<div id="loader"><div id="loadMsg">正在扬起风沙 . . .</div></div>
+<div id="fader"></div>
+
+<script src="js/util.js"></script>
+<script src="js/shaders.js"></script>
+<script src="js/world.js"></script>
+<script src="js/story.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
