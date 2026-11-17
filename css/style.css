@@ -182,4 +182,3 @@ figcaption small{display:block;font-family:var(--f-mono);font-size:9.5px;letter-
 
 #scroller{position:relative;height:100vh;pointer-events:none}
 @media (prefers-reduced-motion:reduce){.scrollhint i,.hs .dot::after{animation:none}}
-
